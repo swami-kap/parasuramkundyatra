@@ -1,0 +1,1115 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Gayathri Jabam</title>
+  <script type="text/JavaScript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js" ></script>
+  <script type="text/JavaScript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js" ></script>
+  <meta name="viewport" content="width=device-width" />
+  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/bootstrap.select/2.0.0-beta1/css/bootstrap-select.min.css">
+  <script type="text/JavaScript" src="https://cdn.jsdelivr.net/bootstrap.select/2.0.0-beta1/js/bootstrap-select.min.js" ></script>
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/css/bootstrap-datepicker.css">
+    <script type="text/JavaScript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/js/bootstrap-datepicker.min.js" ></script>
+   
+  <script type="text/javascript">
+/*!
+ * Validator v0.8.1 for Bootstrap 3, by @1000hz
+ * Copyright 2015 Cina Saffary
+ * Licensed under http://opensource.org/licenses/MIT
+ *
+ * https://github.com/1000hz/bootstrap-validator
+ */
+
++function(a){"use strict";function b(b){return this.each(function(){var c=a(this),e=a.extend({},d.DEFAULTS,c.data(),"object"==typeof b&&b),f=c.data("bs.validator");(f||"destroy"!=b)&&(f||c.data("bs.validator",f=new d(this,e)),"string"==typeof b&&f[b]())})}var c=':input:not([type="submit"], button):enabled:visible',d=function(b,c){this.$element=a(b),this.options=c,c.errors=a.extend({},d.DEFAULTS.errors,c.errors);for(var e in c.custom)if(!c.errors[e])throw new Error("Missing default error message for custom validator: "+e);a.extend(d.VALIDATORS,c.custom),this.$element.attr("novalidate",!0),this.toggleSubmit(),this.$element.on("input.bs.validator change.bs.validator focusout.bs.validator",a.proxy(this.validateInput,this)),this.$element.on("submit.bs.validator",a.proxy(this.onSubmit,this)),this.$element.find("[data-match]").each(function(){var b=a(this),c=b.data("match");a(c).on("input.bs.validator",function(){b.val()&&b.trigger("input.bs.validator")})})};d.DEFAULTS={delay:500,html:!1,disable:!0,custom:{},errors:{match:"Does not match",minlength:"Not long enough"}},d.VALIDATORS={"native":function(a){var b=a[0];return b.checkValidity?b.checkValidity():!0},match:function(b){var c=b.data("match");return!b.val()||b.val()===a(c).val()},minlength:function(a){var b=a.data("minlength");return!a.val()||a.val().length>=b}},d.prototype.validateInput=function(b){var c=a(b.target),d=c.data("bs.validator.errors");if(c.is('[type="radio"]')&&(c=this.$element.find('input[name="'+c.attr("name")+'"]')),this.$element.trigger(b=a.Event("validate.bs.validator",{relatedTarget:c[0]})),!b.isDefaultPrevented()){var e=this;this.runValidators(c).done(function(f){c.data("bs.validator.errors",f),f.length?e.showErrors(c):e.clearErrors(c),d&&f.toString()===d.toString()||(b=f.length?a.Event("invalid.bs.validator",{relatedTarget:c[0],detail:f}):a.Event("valid.bs.validator",{relatedTarget:c[0],detail:d}),e.$element.trigger(b)),e.toggleSubmit(),e.$element.trigger(a.Event("validated.bs.validator",{relatedTarget:c[0]}))})}},d.prototype.runValidators=function(b){function c(a){return b.data(a+"-error")||b.data("error")||"native"==a&&b[0].validationMessage||g.errors[a]}var e=[],f=a.Deferred(),g=this.options;return b.data("bs.validator.deferred")&&b.data("bs.validator.deferred").reject(),b.data("bs.validator.deferred",f),a.each(d.VALIDATORS,a.proxy(function(a,d){if((b.data(a)||"native"==a)&&!d.call(this,b)){var f=c(a);!~e.indexOf(f)&&e.push(f)}},this)),!e.length&&b.val()&&b.data("remote")?this.defer(b,function(){var d={};d[b.attr("name")]=b.val(),a.get(b.data("remote"),d).fail(function(a,b,d){e.push(c("remote")||d)}).always(function(){f.resolve(e)})}):f.resolve(e),f.promise()},d.prototype.validate=function(){var a=this.options.delay;return this.options.delay=0,this.$element.find(c).trigger("input.bs.validator"),this.options.delay=a,this},d.prototype.showErrors=function(b){var c=this.options.html?"html":"text";this.defer(b,function(){var d=b.closest(".form-group"),e=d.find(".help-block.with-errors"),f=d.find(".form-control-feedback"),g=b.data("bs.validator.errors");g.length&&(g=a("<ul/>").addClass("list-unstyled").append(a.map(g,function(b){return a("<li/>")[c](b)})),void 0===e.data("bs.validator.originalContent")&&e.data("bs.validator.originalContent",e.html()),e.empty().append(g),d.addClass("has-error"),f.length&&f.removeClass("glyphicon-ok")&&f.addClass("glyphicon-warning-sign")&&d.removeClass("has-success"))})},d.prototype.clearErrors=function(a){var b=a.closest(".form-group"),c=b.find(".help-block.with-errors"),d=b.find(".form-control-feedback");c.html(c.data("bs.validator.originalContent")),b.removeClass("has-error"),d.length&&d.removeClass("glyphicon-warning-sign")&&d.addClass("glyphicon-ok")&&b.addClass("has-success")},d.prototype.hasErrors=function(){function b(){return!!(a(this).data("bs.validator.errors")||[]).length}return!!this.$element.find(c).filter(b).length},d.prototype.isIncomplete=function(){function b(){return"checkbox"===this.type?!this.checked:"radio"===this.type?!a('[name="'+this.name+'"]:checked').length:""===a.trim(this.value)}return!!this.$element.find(c).filter("[required]").filter(b).length},d.prototype.onSubmit=function(a){this.validate(),(this.isIncomplete()||this.hasErrors())&&a.preventDefault()},d.prototype.toggleSubmit=function(){if(this.options.disable){var b=a('button[type="submit"], input[type="submit"]').filter('[form="'+this.$element.attr("id")+'"]').add(this.$element.find('input[type="submit"], button[type="submit"]'));b.toggleClass("disabled",this.isIncomplete()||this.hasErrors()).css({"pointer-events":"all",cursor:"pointer"})}},d.prototype.defer=function(a,b){return this.options.delay?(window.clearTimeout(a.data("bs.validator.timeout")),void a.data("bs.validator.timeout",window.setTimeout(b,this.options.delay))):b()},d.prototype.destroy=function(){return this.$element.removeAttr("novalidate").removeData("bs.validator").off(".bs.validator"),this.$element.find(c).off(".bs.validator").removeData(["bs.validator.errors","bs.validator.deferred"]).each(function(){var b=a(this),c=b.data("bs.validator.timeout");window.clearTimeout(c)&&b.removeData("bs.validator.timeout")}),this.$element.find(".help-block.with-errors").each(function(){var b=a(this),c=b.data("bs.validator.originalContent");b.removeData("bs.validator.originalContent").html(c)}),this.$element.find('input[type="submit"], button[type="submit"]').removeClass("disabled"),this.$element.find(".has-error").removeClass("has-error"),this};var e=a.fn.validator;a.fn.validator=b,a.fn.validator.Constructor=d,a.fn.validator.noConflict=function(){return a.fn.validator=e,this},a(window).on("load",function(){a('form[data-toggle="validator"]').each(function(){var c=a(this);b.call(c,c.data())})})}(jQuery);
+  </script>
+  
+      <script>
+
+
+
+       var name,date,email,mobNo,area,veda,gotra,soothram,whatsAppUser,profStatus,eduLevel,fos,kulaDeivam,nativePlace,collegeName,aoi;
+       var today = new Date();
+       var dd = today.getDate();
+       var mm = today.getMonth()+1; //January is 0!
+       var yyyy = today.getFullYear();
+       if(dd<10){
+        dd='0'+dd
+        } 
+       if(mm<10){
+        mm='0'+mm
+       } 
+       var today = dd+'/'+mm+'/'+yyyy;
+
+       function postContactToGoogle() {
+           
+
+           
+
+                $.ajax({
+                    url: "https://docs.google.com/forms/d/1I19qVZyAA_C8llfwidLUfddnoUETjnp-QA0ljP9-sj4/formResponse",
+                    data: { "entry.1216820754": name,"entry.182971134":date,"entry.1004946807":email,"entry.264589959":mobNo,"entry.1066002639":profStatus,"entry.490340224":veda,"entry.631603009":gotra,"entry.2069863428":kulaDeivam,"entry.844251311":whatsAppUser,"entry.1826719365":soothram},
+                    //"entry.889990389":"0","entry.1349921718":today},
+                    type: "POST",
+                    crossDomain:true,     
+                    statusCode: {
+                        0: function () {
+                          $('#modalBtn').click();
+                         // resetForm();
+                        },
+                        200: function () {
+                          // console.log('sucess');
+                        }
+                    }
+                });
+        }
+
+        function showEnterArea(event){
+          $('.areaDiv').removeClass('has-error');
+          if($('#areaCheck').is(':checked')){
+            $('.enteredAreaDiv').removeClass('displayNone');
+            $("#enteredArea").prop('required',true);
+            $('#area').prop('required',false);
+            $('#area').val('');
+            $('#area').attr('disabled',true);
+            $('#areaLbl sub').addClass('displayNone');
+            //$('#area').css('border-color','#ccc');
+          }
+          else{
+            $('.enteredAreaDiv').addClass('displayNone');
+            $("#enteredArea").prop('required',false);
+            $('#area').prop('required',true);
+            $('#area').attr('disabled',false);
+            $('#areaLbl sub').removeClass('displayNone');
+            /*if(!$('#area').val()){
+              $('#area').css('border-color','#a94442');
+            }*/
+          }
+        }
+        function showTimings(event){
+          if($("input[type='radio'][name='prefClass']:checked").val()=='weekdays'){
+            $('.wdDiv').removeClass('displayNone');
+            $('#wdTiming').prop('required',true);
+            $('#weTiming').prop('required',false);
+            $('#weTiming').val('');
+            if(!$('.weDiv').hasClass('displayNone')){
+            $('.weDiv').addClass('displayNone');
+          }
+          }
+          
+          else{
+            if(!$('wdDiv').hasClass('displayNone')){
+                $('.wdDiv').addClass('displayNone');
+           }
+            $('.weDiv').removeClass('displayNone');
+            $('#wdTiming').prop('required',false);
+            $('#weTiming').prop('required',true);
+            $('#wdTiming').val('');
+
+          }
+        }
+        
+        function showTime(event){
+          if($('#timeCheck').is(':checked')){
+          //$('.preferredTimeDiv').removeClass('displayNone');
+          $('#preferredTime').prop('required',true);
+          $('#wdTiming').prop('required',false);
+          $('#wdTiming').val('');
+          $('#weTiming').val('');
+          $('#wdTiming').attr('disabled',true);
+          $('#weTiming').attr('disabled',true);
+        }
+        else{
+          //$('.preferredTimeDiv').addClass('displayNone');
+          if($("input[type='radio'][name='prefClass']:checked").val()=='weekdays'){
+            $('#wdTiming').prop('required',true);
+          }
+          else{
+            $('#weTiming').prop('required',true);   
+          }
+          $('#wdTiming').attr('disabled',false);
+          $('#weTiming').attr('disabled',false);
+          $('#preferredTime').prop('required',false);
+          $('#preferredTime').val('');
+        }
+
+        }
+        function onSubmitButtonClicked(event){
+       event.preventDefault();
+       var correctDate,correctMonth;
+          name=$('#name').val();
+          email=$('#email').val();
+          mobNo=$('#mobNo').val();
+          area=$('#area').val()?$('#area').val():$('#enteredArea').val();
+          
+          veda=$('#veda').val();
+          gotra=$('#gotra').val();
+          soothram=$('#soothram').val();
+            date=$("#datepicker").find("input").val();
+           
+            profStatus=$('#profStatus').val();
+          //   if(profStatus=="Student"){
+          //   eduLevel=$('#stuAdd').val() ;
+          //   }
+          //   else if(profStatus=="Resigned Teacher/IT"){
+          //   eduLevel=$('#subject').val() ;
+          //   }
+          // else{
+          //   eduLevel="";
+          // }
+         // eduLevel=$('#stuAdd').val()?$('#stuAdd').val():"";
+         // fos=$('#field').val()?$('#field').val():"";
+          
+          
+        
+          
+        whatsAppUser=$("input[type='radio'][name='whatsApp']:checked").val();
+        //maritalStatus=$("input[type='radio'][name='maritalStatus']:checked").val();
+        kulaDeivam = $('#kulaDeivam').val();
+       // aoi=$('#aoi').val()?$('#aoi').val():"";
+        //collegeName=$('#collegeName').val();
+        //nativePlace=$('#native').val();
+        
+          postContactToGoogle();
+          
+        }
+        $(document).ready(function(){
+            $('[data-toggle="tooltip"]').tooltip({
+        placement : 'bottom'
+    });
+
+$('#datepicker').datepicker({format:'dd/mm/yyyy', autoclose: true,orientation:"bottom"});
+//   $('#profStatus').change(function(){
+
+//   if($(this).val()=="Student"){
+   
+ 
+//           var edulevelHt='<label class="control-label col-sm-3 " > Select the level of Education: <sub>*</sub></label>'+
+//             '<div class="col-sm-4"> <select id="stuAdd" onchange="showAdditonalEduDetails(event)" class="form-control" required data-error="Select a Level"><option value="">Select a Level</option>'+
+//             '<option value="School">School</option>'+
+//       '<option value="UG"> Unde Graduate</option>'+
+//       '<option value="PG">Post Graduate</option>'+'<option value="Research">Research</option>'+'</select></div><div class="help-block with-errors" ></div>';
+//       $('.eduLevelDiv').removeClass('displayNone');
+//       $('.eduLevelDiv').html(edulevelHt);
+
+//         }
+
+//         else if($(this).val()=="Resigned Teacher/IT"){
+// var subjectHTML='<label class="control-label col-sm-3 " >Subject Handled/ Primary Skillset: <sub>*</sub></label>'+
+//             '<div class="col-sm-4"><input type=text placeholder="Enter Subject/Skill (Multiple Subjects/Skills comma seperated)" id=subject class=form-control required data-error="Enter a Subject"> </div><div class="help-block with-errors" ></div>';
+            
+            
+//             $('.eduLevelDiv').removeClass('displayNone');
+//       $('.eduLevelDiv').html(subjectHTML);
+//       showAdditonalEduDetails();
+//         }
+      
+//        else{
+//         $('.eduLevelDiv').addClass('displayNone');
+//          $('.eduLevelDiv').empty();
+//           $('.eduLevelDiv').removeClass('has-error');
+//             showAdditonalEduDetails();
+       
+//       }
+//     });
+
+
+
+
+    
+
+
+    $('#registrationForm').validator().on('submit', function (e) {
+  if (e.isDefaultPrevented()) {
+    if(!$('#gotra').val()){
+      $('.dropdown-toggle').css('border-color','#a94442');
+      $('.gotraError').text('Please select a gotra');
+      $('.gotraError').css('color','#a94442');
+      $('.dropdown-toggle').addClass('gHasError');
+    }
+    else{
+      $('.dropdown-toggle').css('border-color','#ccc');
+      $('.dropdown-toggle').removeClass('gHasError');
+      $('.gotraError').text('');
+      
+    }
+    $('#alertBtn').click();
+       
+   } 
+   else {
+  e.preventDefault();
+  $('#cBtn').click();
+
+  }
+});
+        });
+    
+ 
+
+  function confirmOkayClicked(e){
+    onSubmitButtonClicked(e);
+    $('.dropdown-toggle').css('border-color','#ccc');
+    $('.dropdown-toggle').removeClass('gHasError');
+    $('.gotraError').text('');
+
+  }  
+function resetName(){
+ $('#name').val('');
+ $("#datepicker").find("input").val('');
+ $('#profStatus').val("");
+ $('.eduLevelDiv').empty();
+ $('.eduSchoolDetailsDiv').empty();
+ $('.eduAddDetailsDiv').empty();
+ $('.eduLevelDiv').addClass('displayNone');
+ $('.eduSchoolDetailsDiv').addClass('displayNone');
+ $('.eduAddDetailsDiv').addClass('displayNone');
+
+}
+function resetForm(){
+ 
+  document.getElementById("registrationForm").reset();
+  showEnterArea();
+ $('#gotra').val('');
+  $('.eduLevelDiv').empty();
+ $('.eduSchoolDetailsDiv').empty();
+ $('.eduAddDetailsDiv').empty();
+ $('.eduLevelDiv').addClass('displayNone');
+ $('.eduSchoolDetailsDiv').addClass('displayNone');
+ $('.eduAddDetailsDiv').addClass('displayNone');
+  $('.selectpicker').selectpicker('render');
+}
+ function showAdditonalEduDetails(event){
+  $('.eduAddDetailsDiv').removeClass('has-error');
+     $('.eduSchoolDetailsDiv').removeClass('has-error');
+  if($('#stuAdd').val()=="School"){
+
+    var schoolNameHT='<label class="control-label col-sm-3 " > Enter the School Name :<sub>*</sub></label>'+
+    '<div class="col-sm-4"> <input type=text class="form-control" id="collegeName" placeholder="Enter School Name" required data-error="Please Enter School Name">'+
+    '</div><div class="help-block with-errors" ></div>';
+
+var schoolAddDets='<label class="control-label col-sm-3 " >Standard: <sub>*</sub></label>'+
+      '<div class="col-sm-2">'+
+       '<select class="form-control" id="field" required data-error="Please select a Standard">'+
+      '<option value="">Select a Standard</option>'+
+      '<option value="1">I</option>'+
+      '<option value="2"> II</option>'+
+      '<option value="3">III</option>'+
+      '<option value="4">IV</option><option value="5">V</option><option value="6">VI</option> <option value="7">VII</option>'+
+   '<option value="8">VIII</option><option value="9">IX</option><option value="10">X</option><option value="11">XI</option>'+
+   '<option value="12">XII</option></select></div><div class="help-block with-errors" ></div>';
+   $('.eduAddDetailsDiv').html(schoolAddDets);
+   $('.eduSchoolDetailsDiv').html(schoolNameHT);
+   $('.eduAddDetailsDiv').removeClass('displayNone');
+   $('.eduSchoolDetailsDiv').removeClass('displayNone');
+      
+ }
+  else if($('#stuAdd').val()=="UG"||$('#stuAdd').val()=="PG"||$('#stuAdd').val()=="Research"){
+
+        var collegeNameHT='<label class="control-label col-sm-3 " >College/University Name :<sub>*</sub></label>'+
+    '<div class="col-sm-4"> <input type=text class="form-control" placeholder="Enter College/University Name" id="collegeName" required data-error="Please Enter School Name">'+
+    '</div><div class="help-block with-errors" ></div>';
+    var fieldOFStudyHT='<label class="control-label col-sm-3 "> Field of Study: <sub>*</sub></label>'+
+    '<div class="col-sm-4">'+
+     ' <input type="text" class="form-control" id="field" placeholder="Enter Field of Study" pattern="[A-Za-z. ]{1,100}" data-error="Please  Enter A Field of Study" required ></div><div class="help-block with-errors" ></div>';
+    
+      $('.eduAddDetailsDiv').html(fieldOFStudyHT);
+   $('.eduSchoolDetailsDiv').html(collegeNameHT);
+      $('.eduAddDetailsDiv').removeClass('displayNone');
+       $('.eduSchoolDetailsDiv').removeClass('displayNone');
+   
+   
+   
+      
+     
+  }else{
+     $('.eduAddDetailsDiv').addClass('displayNone'); 
+     $('.eduSchoolDetailsDiv').addClass('displayNone');
+     $('.eduAddDetailsDiv').empty();
+     $('.eduSchoolDetailsDiv').empty();
+  }
+}
+function linkOnClick(event){
+event.preventDefault();
+}
+
+
+function removeError(event){
+  //console.log($('#gotra').val());
+    if($('#gotra').val()==""){
+      $('.dropdown-toggle').css('border-color','#a94442');
+      $('.dropdown-toggle').addClass('gHasError');
+      $('.gotraError').text('Please select a gotra');
+      $('.gotraError').css('color','#a94442');
+    }
+    else{
+      $('.dropdown-toggle').css('border-color','#ccc');
+      $('.dropdown-toggle').removeClass('gHasError');
+      $('.gotraError').text('');
+      
+
+    }
+
+}
+
+    </script>
+    <style type="text/css">
+    .displayNone{
+      display: none;
+    }
+    sub{
+      color:red;
+    }
+    div,.control-label{
+      font-family: "Times New Roman", Times, serif;
+
+    }
+
+    .btn-primary{
+      background:#EFD097;
+      border-color: maroon;
+      color:maroon;
+      font-weight: bold;
+    }
+    .btn-primary:focus{
+      background: #EFD097;
+      border-color: maroon;
+      color:maroon;
+    }
+    .btn-primary:hover{
+      background: maroon;
+      color: white;
+    }
+
+    optgroup
+{
+color: red;
+}
+option{
+  color:black;
+}
+.btn-primary.disabled{
+  background: #EFD097;
+  border-color: maroon;
+  opacity: 1;
+}
+.btn-primary.disabled:hover{
+  background:maroon;
+}
+.btn-primary.disabled:focus{
+  background:#EFD097;
+  border-color: maroon;
+  color:maroon;
+}
+.blink_me {
+    -webkit-animation-name: blinker;
+    -webkit-animation-duration: 1s;
+    -webkit-animation-timing-function: linear;
+    -webkit-animation-iteration-count: infinite;
+    
+    -moz-animation-name: blinker;
+    -moz-animation-duration: 1s;
+    -moz-animation-timing-function: linear;
+    -moz-animation-iteration-count: infinite;
+    
+    animation-name: blinker;
+    animation-duration: 1s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+@-moz-keyframes blinker {  
+    0% { color: red; }
+    50% { color: maroon; }
+    100% { color: red; }
+}
+
+@-webkit-keyframes blinker {  
+   0% { color: red; }
+    50% { color: maroon; }
+    100% { color: red; }
+}
+
+@keyframes blinker {  
+    0% { color: red; }
+    50% { color: maroon; }
+    100% { color: red; }
+}
+
+
+.btn-default.active, .btn-default.focus, .btn-default:active, .btn-default:focus, .btn-default:hover, .open>.dropdown-toggle.btn-default{
+  background: white;
+
+}
+.holder{
+  padding-top: 1%;
+  padding-bottom:1%;
+  /*box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .14), 0 3px 1px -2px rgba(0, 0, 0, .2), 0 1px 5px 0 rgba(0, 0, 0, .12);*/
+  border:brown 1px solid;
+  margin-bottom: 1.5%;
+}
+.btnHolder{
+  padding-top: 1%;
+  padding-bottom:1%;
+}
+
+.has-error .form-control,.gHasError{
+ border-width: 2px;
+}
+
+ </style>
+
+
+
+
+
+</head>
+<body>
+
+<div class="container-fluid">
+
+<div class="modal fade" id="myModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Success</h4>
+      </div>
+      <div class="modal-body">
+        <p>Thank You for registering with us. We will get back to you shortly.</p>
+        <p>Do you want to Register for another person in your family? All common values will be retained</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" onclick="resetName()">Yes</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal" onclick="resetForm()">No</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+
+<div class="modal fade" id="errorAlert">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Alert</h4>
+      </div>
+      <div class="modal-body">
+        <p>Ensure the fields highlighted in red are not empty/not selected or not filled correctly. Name-Alphabets only (Max:100 characters),MobNo/Landline- Should have 8 or 10 digits & Email format-example@____.com</p>
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" >Ok</button>
+       </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+<div class="modal fade" id="confirmAlert">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Confirmation</h4>
+      </div>
+      <div class="modal-body">
+        <p>By clicking on Submit you confirm the details entered. Click 'OK'to proceed or 'Cancel' to re check the details.</p>
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" onclick="confirmOkayClicked(event)" >OK</button>
+         <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+       </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+
+
+
+<div class="modal fade" id="faqModel">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">FAQ's</h4>
+      </div>
+      <div class="modal-body">
+       <p>1. What is the essence of this workshop? When and how long is it?</p>
+        <p>Our aim is to blend fun with learning and to enlighten the audience about the greatness of our country.</p>
+        <p>2. Who are the speakers?</p>
+        <p>Eminent speakers who are experts in their subject matter will share their knowledge enriched with experience connecting it to the Generation next.</p>
+        <p>3. Who can Attend?</p>
+        <p>This is for  girls/ladies aged between 8yrs to 60yrs respecting the traditional and dharmic way of life and are keen to know the answers for many of their questions. However they will be properly segregated based on age so that a homogeneous group is formed.</p>
+        <p>4. What are the eligibility criteria?</p>
+        <p>There is no prerequisite as such but for the open mind to learn and the urge to continue the learning and apply them in day today life.</p>
+           <p>5. What is the venue and Does it Include boarding and lodging?</p>
+           <p>Venue:  SRDF Vivekananda Vidhyalaya , Chrompet. It has good ventilation. Separate halls for different age groups. Sufficient bathroom/rest room facilities and ample open space for group activity and games. It is located in the residential area with fully secured gate. In addition to that security people will be deployed to ensure safe and peaceful stay. Simple and hygienic vegetarian food will be provided for entire two days.</p>
+           
+           <p>6. Whether transportation will be provided?</p>
+           <p>Participants should arrange for their transport. However planning to create a whats app group area wise based on the registration where a volunteer shall guide you through.</p>
+           <p>7.Is it compulsory to stay back at venue or can I go and come back?</p>
+           <p>Night stay facilities are available. However, if one wishes to go home after the day1 event (which may go upto 7.30 p.m )shall report on the next day 10 minutes before the scheduled time.</p>
+           <p>8.What are the post workshop plans?</p>
+           <p>In order to keep the spirit high and to continue the knowledge gain we are planning to have a weekend online classes followed by monthly once meeting where most of the workshop topics will be dealt in detail. A complete syllabus for 15 months will be shared later.</p>
+           <p>9.Can I join if am in my monthly periods??</p>
+           <p>Yes. Knowledge gaining has no constraints. However, you can be an observer during physical activity session.</p>
+            <p>10.Is there any dress code</p>
+            <p>Yes. Being peak summer, cotton casual wear with dhuppatta/stole shall be the comfortable one. Since we have an exercise session on both days we recommend a cotton kurta pyjama for that. </p>
+            <p>11.Is it open to Chennai Alone?</p>
+            <p>All are welcome across the country who has got the flair to introspect, reflect and wish to be a change agent.</p>
+            <p>12.What all we need to bring?</p>
+            <p>Upon registration you will be provided with the link along with the confirmation mail, which gives you all the necessary input.</p>
+            <p>13.Is there any fee?</p>
+            <p>A nominal fee of Rs.500 per person including the boarding and lodging.</p>
+            <p>14. How and to whom can I pay my registration fees?</p>
+            <p>Upon registration the organizer will call you in person  to confirm your details and also give you the details regarding the mode of payment.</p>
+           <p> 15.I have a boy can I bring him?</p>
+           <p>Yes if he is less than 8 years with a minimal charge of 200.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
+        
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal  -->
+  <div class="col-sm-12">
+  
+  <div class="col-sm-12 " style="background:#EFD097; color:maroon;padding:1%">
+  <div class="col-md-12 col-xs-12 col-sm-12">
+        <img src="grpimg.png" class="img-responsive" style="margin:0 auto;">
+  </div>
+
+
+
+      <label class="col-sm-12" style="font-size: 30px; text-align: center;">PARASURAM KUND YATRA</label>
+      <!-- <div class="col-sm-12"> -->
+     <!--  <div class="row">
+        <div class="col-sm-12">
+        </div>
+      </div> -->
+      <p class="col-sm-12" style="font-size: 16px;">
+        With the benign blessings of Their Holiness Jagathgurus Pujyasri Sankaracharya Swamijis of
+Sri Kanchi Kamakoti Peetam, VISHWA SHANTHI HOMAM & VEDA PARAYANAM is being
+planned at Parasuram Kund, Arunachal Pradesh, during Makara Sankaranti on 14th January
+2018.
+Lord Parasuram, to cleanse himself of his brahmahathi dosham, bathed in the holy waters of
+River Lohit, a tributary of the mighty River Brahmaputra, at Parasuram Kund located in the
+Brahmaputra plateau.
+Each year, lakhs of devotees assemble at Parasuram Kund to bathe in these holy waters
+during Makara Sankaranti that marks the beginning of the Uttarayana Punya Kaalam. A
+temple dedicated to Lord Parasuram and Renuka Devi stands on the banks of River Lohit.
+The Parasuram Mela is a major Hindu festival of Arunachal Pradesh, North East. It is the divine
+direction of Pujyasri Acharyas that we undertake this yatra and perform the Punya snanam.
+The 3-day program includes, Punya snanam at Parasuram Kund & visit to the temple, Homam,
+Veda Parayanam, Sloka Parayanam and Namasankeertanam/bhajans. We request devotees
+to join us in this unique yatra and receive the blessings of Pujyasri Acharyas
+      </p> 
+
+  
+ <p class="col-sm-12" style="font-size: 14px; font-weight:bold">Yatra dates:<span class="blink_me">12th January 2018 – 15th January 2018.</span></p>
+<p class="col-sm-12" style="font-size: 14px; font-weight:bold">Kindly confirm your participation by <span class="blink_me">31st October 2018</span> to help us make the group bookings.</p>
+<p class="col-sm-12" style="font-size: 14px; font-weight:bold">For further details contact</p>
+<p class="col-sm-12" style="font-size: 14px; font-weight:bold">M. S. Anand +919940089268 / +919940045965; yemyes@yahoo.com</p>
+<p class="col-sm-12" style="font-size: 14px; font-weight:bold">R. Rajesh +919840850347</p>
+</div>
+</div>
+
+  
+    
+  
+  <div class="col-sm-12" style="height:20px"></div>
+  <div class="col-sm-12">
+
+  </div>
+  <div class="col-sm-12" style="color:maroon;">
+    <label class="control-label col-xs-12" style="font-size:25px;text-align: center;">Registration Form</label>
+  </div>
+  <div class="col-sm-12 blink_me" >
+    <label class="control-label col-xs-12" style="font-size:15px;text-align: center;"> Kindly make sure pop-up blocker is disabled in your browser.</label>
+  </div>
+  <div class="col-sm-12" style="color:maroon;">
+  <div class="col-sm-12">
+  
+  <form class="form-horizontal" role="form"  id="registrationForm" data-toggle="validator"
+   novalidate=true>
+ <fieldset class="holder col-sm-12">
+  <div class="form-group"> 
+  
+    <label class="control-label col-sm-3" for="name">Name: <sub>*</sub></label>
+    <div class="col-sm-4">
+      <input type="text" class="form-control" id="name" placeholder="Enter Name" pattern="[A-Za-z. ]{1,100}" data-error="Please enter a valid name" required >
+    </div>
+    <div class="help-block with-errors" ></div>
+  </div>
+    <div class="form-group"> 
+   <!--  <div class="col-sm-12" style="text-align:center"><p style="font-weight:bold">Note: If you are manually typing DOB ensure you type '/' after date & month. Kindly follow dd/mm/yy format.</p></div> -->
+    <label class="control-label col-sm-3" for="dob">DOB: <sub>*</sub></label>
+    <div class="col-sm-4">
+      
+                <div class='input-group date' id='datepicker'>
+                    <input type='text' id="dob"class="form-control"  data-error="Please enter a valid /select date" autocomplete="off" required placeholder="dd/mm/yyyy"/>
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+            <p style="font-weight:bold">Note: If you are manually typing DOB ensure you type '/' after date & month. Kindly follow dd/mm/yy format.</p>
+    </div>
+    <div class="help-block with-errors" ></div>
+  </div>
+  <div class="form-group">
+    <label class="control-label col-sm-3" for="email">Email: <sub>*</sub></label>
+    <div class="col-sm-4">
+      <input type="email" class="form-control" id="email" placeholder="Enter email"  data-error="Please enter a valid Email" required>
+    </div>
+   
+     <div class="help-block with-errors" ></div>
+  </div>
+  <div class="form-group">
+    <label class="control-label col-sm-3" for="mobNo">Primary Mobile No: / Landline <sub>*</sub></label>
+    <div class="col-sm-4"> 
+      <input type="tel" class="form-control" id="mobNo"  maxlength= "10" placeholder="Enter Mobile / Landline Number"  pattern="^(\d{8})(\d{2})?$"  data-error="Please enter a valid mobile / landline Number" required>
+    </div>
+     <div class="help-block with-errors" ></div>
+  </div>
+<!--   <div class="form-group">
+    <label class="control-label col-sm-3" for="mobNo">Secondary Mobile No: / Landline <sub>*</sub></label>
+    <div class="col-sm-4"> 
+      <input type="tel" class="form-control" id="secMobNo"  maxlength= "10" placeholder="Enter Mobile / Landline Number"  pattern="^(\d{8})(\d{2})?$"  data-error="Please enter a valid mobile / landline Number" required>
+    </div>
+     <div class="help-block with-errors" ></div>
+  </div> -->
+  <div class="form-group">
+    <label class="control-label col-sm-3" for="mobNo">Do you use WhatsApp:<sub>*</sub></label>
+    <div class="col-sm-1 radio"> 
+      <label><input type="radio" name="whatsApp" required value="yes" data-error="Please Select One Option" >Yes</label>
+    </div>
+    <div class="col-sm-1 radio"> 
+      <label><input type="radio" name="whatsApp" required value="no" >No</label>
+    </div>
+     <div class="help-block with-errors" ></div>
+  </div>
+ <!-- <div class="form-group  areaDiv">
+    <label class="control-label col-sm-3" for="area" id="areaLbl"> Area: <sub>*</sub></label>
+    <div class="col-sm-4"> 
+      <select id="area" class="form-control"   data-error="Please select a area" required>
+        <option value="">Select an Area</option>
+        <option value="Adambakkam">Adambakkam</option>
+ <option value="Adyar">Adyar</option>
+ <option value="Alandur">Alandur</option>
+ <option value="Alwarpet">Alwarpet</option>
+ <option value="Alwarthirunagar">Alwarthirunagar</option>
+ <option value="Ambattur">Ambattur</option>
+ <option value="Aminjikarai">Aminjikarai</option>
+ <option value="Anakaputhur">Anakaputhur</option>
+ <option value="Anna Nagar">Anna Nagar</option>
+ <option value="Annanur">Annanur</option>
+ <option value="Arumbakkam">Arumbakkam</option>
+ <option value="Ashok Nagar">Ashok Nagar</option>
+ <option value="Avadi">Avadi</option>
+ <option value="Ayanavaram">Ayanavaram</option>
+ <option value="Besant Nagar">Besant Nagar</option>
+ <option value="Basin Bridge">Basin Bridge</option>
+ <option value="Chepauk">Chepauk</option>
+ <option value="Chetput">Chetput</option>
+ <option value="Chintadripet">Chintadripet</option>
+ <option value="Chitlapakkam">Chitlapakkam</option>
+ <option value="Choolai">Choolai</option>
+ <option value="Choolaimedu">Choolaimedu</option>
+ <option value="Chrompet">Chrompet</option>
+ <option value="Egmore">Egmore</option>
+ <option value="Ekkaduthangal">Ekkaduthangal</option>
+ <option value="Ennore">Ennore</option>
+ <option value="Foreshore Estate">Foreshore Estate</option>
+ <option value="Fort St. George">Fort St. George</option>
+ <option value="George Town">George Town</option>
+ <option value="Gopalapuram">Gopalapuram</option>
+ <option value="Government Estate">Government Estate</option>
+ <option value="Guindy">Guindy</option>
+ <option value="Guduvanchery">Guduvanchery</option>
+ <option value="IIT Madras">IIT Madras</option>
+ <option value="Injambakkam">Injambakkam</option>
+ <option value="ICF">ICF</option>
+ <option value="Iyyapanthangal">Iyyapanthangal</option>
+ <option value="Jafferkhanpet">Jafferkhanpet</option>
+ <option value="Karapakkam">Karapakkam</option>
+ <option value="Kattivakkam">Kattivakkam</option>
+ <option value="Kazhipattur">Kazhipattur</option>
+ <option value="K.K. Nagar">K.K. Nagar</option>
+ <option value="Keelkattalai">Keelkattalai</option>
+ <option value="Kelambakkam">Kelambakkam</option>
+ <option value="Kilpauk">Kilpauk</option>
+ <option value="Kodambakkam">Kodambakkam</option>
+ <option value="Kodungaiyur">Kodungaiyur</option>
+ <option value="Kolathur">Kolathur</option>
+ <option value="Korattur">Korattur</option>
+ <option value="Korukkupet">Korukkupet</option>
+ <option value="Kottivakkam">Kottivakkam</option>
+ <option value="Kotturpuram">Kotturpuram</option>
+ <option value="Kovalam">Kovalam</option>
+ <option value="Kovilambakkam">Kovilambakkam</option>
+ <option value="Koyambedu">Koyambedu</option>
+ <option value="Kundrathur">Kundrathur</option>
+ <option value="Okkiyum Thoraipakkam">Okkiyum Thoraipakkam</option>
+ <option value="Madhavaram">Madhavaram</option>
+ <option value="Madhavaram Milk Colony">Madhavaram Milk Colony</option>
+ <option value="Madipakkam">Madipakkam</option>
+ <option value="Madambakkam">Madambakkam</option>
+ <option value="Maduravoyal">Maduravoyal</option>
+ <option value="Manali">Manali</option>
+ <option value="Manali New Town">Manali New Town</option>
+ <option value="Manapakkam">Manapakkam</option>
+ <option value="Mandaveli">Mandaveli</option>
+ <option value="Mangadu">Mangadu</option>
+ <option value="Mannadi">Mannadi</option>
+ <option value="Mathur">Mathur</option>
+ <option value="Medavakkam">Medavakkam</option>
+ <option value="Meenambakkam">Meenambakkam</option>
+ <option value="Minjur">Minjur</option>
+ <option value="Mogappair">Mogappair</option>
+ <option value="MKB Nagar">MKB Nagar</option>
+ <option value="Mount Road">Mount Road</option>
+ <option value="Moolakadai">Moolakadai</option>
+ <option value="Moulivakkam">Moulivakkam</option>
+ <option value="Mugalivakkam">Mugalivakkam</option>
+ <option value="Mylapore">Mylapore</option>
+ <option value="Nandanam">Nandanam</option>
+ <option value="Nanganallur">Nanganallur</option>
+ <option value="Navalur">Navalur</option>
+ <option value="Neelankarai">Neelankarai</option>
+ <option value="Nemilichery">Nemilichery</option>
+ <option value="Nesapakkam">Nesapakkam</option>
+ <option value="Nolambur">Nolambur</option>
+ <option value="Noombal">Noombal</option>
+ <option value="Nungambakkam">Nungambakkam</option>
+ <option value="Padi">Padi</option>
+ <option value="Pakkam">Pakkam</option>
+ <option value="Palavakkam">Palavakkam</option>
+ <option value="Pallavaram">Pallavaram</option>
+ <option value="Pallikaranai">Pallikaranai</option>
+ <option value="Pammal">Pammal</option>
+ <option value="Park Town">Park Town</option>
+ <option value="Parry's Corner">Parry's Corner</option>
+ <option value="Pattabiram">Pattabiram</option>
+ <option value="Pattaravakkam">Pattaravakkam</option>
+ <option value="Pazhavanthangal">Pazhavanthangal</option>
+ <option value="Peerkankaranai">Peerkankaranai</option>
+ <option value="Perambur">Perambur</option>
+ <option value="Peravallur">Peravallur</option>
+ <option value="Perumbakkam">Perumbakkam</option>
+ <option value="Perungalathur">Perungalathur</option>
+ <option value="Perungudi">Perungudi</option>
+ <option value="Pozhichalur">Pozhichalur</option>
+ <option value="Poonamallee">Poonamallee</option>
+ <option value="Porur">Porur</option>
+ <option value="Pudupet">Pudupet</option>
+ <option value="Purasaiwalkam">Purasaiwalkam</option>
+ <option value="Puthagaram">Puthagaram</option>
+ <option value="Puzhal">Puzhal</option>
+ <option value="Puzhuthivakkam">Puzhuthivakkam</option>
+ <option value="Raj Bhavan">Raj Bhavan</option>
+ <option value="Ramavaram">Ramavaram</option>
+ <option value="Red Hills">Red Hills</option>
+ <option value="Royapettah">Royapettah</option>
+ <option value="Royapuram">Royapuram</option>
+ <option value="Saidapet">Saidapet</option>
+ <option value="Saligramam">Saligramam</option>
+ <option value="Santhome">Santhome</option>
+ <option value="Selaiyur">Selaiyur</option>
+ <option value="Shenoy Nagar">Shenoy Nagar</option>
+ <option value="Sholavaram">Sholavaram</option>
+ <option value="Sholinganallur">Sholinganallur</option>
+ <option value="Siruseri">Siruseri</option>
+ <option value="Sithalapakkam">Sithalapakkam</option>
+ <option value="Sowcarpet">Sowcarpet</option>
+ <option value="St.Thomas Mount">St.Thomas Mount</option>
+ <option value="Tambaram">Tambaram</option>
+ <option value="Teynampet">Teynampet</option>
+ <option value="Tharamani">Tharamani</option>
+ <option value="T. Nagar">T. Nagar</option>
+ <option value="Thirumangalam">Thirumangalam</option>
+ <option value="Thirumullaivoyal">Thirumullaivoyal</option>
+ <option value="Thiruneermalai">Thiruneermalai</option>
+ <option value="Thiruninravur">Thiruninravur</option>
+ <option value="Thiruvanmiyur">Thiruvanmiyur</option>
+ <option value="Tiruverkadu">Tiruverkadu</option>
+ <option value="Thiruvotriyur">Thiruvotriyur</option>
+ <option value="Tirusulam">Tirusulam</option>
+ <option value="Tiruvallikeni">Tiruvallikeni</option>
+ <option value="Tondiarpet">Tondiarpet</option>
+ <option value="United India Colony">United India Colony</option>
+ <option value="Urapakkam">Urapakkam</option>
+ <option value="Vandalur">Vandalur</option>
+ <option value="Vadapalani">Vadapalani</option>
+ <option value="Valasaravakkam">Valasaravakkam</option>
+ <option value="Vallalar Nagar">Vallalar Nagar</option>
+ <option value="Vanagaram">Vanagaram</option>
+ <option value="Velachery">Velachery</option>
+ <option value="Veppampattu">Veppampattu</option>
+ <option value="Villivakkam">Villivakkam</option>
+ <option value="Virugambakkam">Virugambakkam</option>
+ <option value="Vyasarpadi">Vyasarpadi</option>
+ <option value="Washermanpet">Washermanpet</option>
+ <option value="West Mambalam">West Mambalam</option>
+       </select>
+     </div>
+ <div class="help-block with-errors" style="display:none"></div> 
+   
+    <div class="col-sm-5 checkbox form-group">
+      <label class="control-label"><input type="checkbox" id="areaCheck" onchange="showEnterArea(event)"> Click on the checkbox if your area is not on the list</label>
+    </div> 
+   
+  </div>
+    <div class="form-group displayNone enteredAreaDiv">
+     <label class="control-label col-sm-3 " > Enter a Area: <sub>*</sub></label>
+      <div class="col-sm-4"> 
+      <input type="text" class="form-control" id="enteredArea" placeholder="Enter an Area" pattern="[a-zA-Z ]{3,40}" data-error="Please enter an area">
+    </div>
+    <div class="help-block with-errors" ></div>
+  </div> -->
+
+   <div class="form-group">
+    <label class="control-label col-sm-3">Occupation: <sub>*</sub></label>
+    <div class="col-sm-4">
+      <select class="form-control" id="profStatus" data-error="Please Select One Option" required>
+      <option value="">Select a Occupation</option>
+      <option value="Student">Student</option>
+      <option value="FullTime">Working Fulltime</option>
+      <option value="PartTime">Working Partime</option>
+      <option value="Homemaker">Homemaker</option>
+      <option value="Retired Others" >Retired (Others)</option>
+      <option value="Resigned Teacher/IT">Resigned (Teacher/ IT)</option>
+      </select>
+    </div>
+   <div class="help-block with-errors" ></div>
+  </div>
+  
+</fieldset>
+
+  <fieldset class="holder col-sm-12">
+   <div class="form-group">
+     <label class="control-label col-sm-3 " > Veda Followed: <sub>*</sub></label>
+      <div class="col-sm-4"> 
+       <select class="form-control" id="veda" required data-error="Please select a veda">
+      <option value="">Select a Veda</option>
+      <option value="Rig Veda">Rig Veda</option>
+      <option value="Shukla Yajur Veda">Shukla Yajur Veda</option>
+      <option value="Krishna Yajur Veda">Krishna Yajur Veda</option>
+      <option value="Sama Veda">Sama Veda</option>
+      <option value="Atharvana Veda">Atharvana Veda</option>
+      </select>
+    </div>
+     <div class="help-block with-errors" ></div>
+  </div>
+    <div class="form-group">
+     <label class="control-label col-sm-3 " > Gotra: <sub>*</sub></label>
+      <div class="col-sm-4"> 
+       <select class="form-control selectpicker dropdown" dropupAuto=false  id="gotra" data-live-search="true"  onchange ="removeError(event)">
+      <option value="">Select a Gotra</option>
+      
+<optgroup label="Brugu (Briku)">
+<option value = Jamadagni Bhargava- Syavana- Aabnavaana - Thrayarisheya- pravaranvitha>Jamadagni</option>
+ <option value = Jaabaali Bhargava- Vaithahavya- Raivasa - Thrayarisheya- pravaranvitha>Jaabaali</option>
+ <option value = Jaamadagnya Bhargava- Aurva- jamadagnya - Thrayarisheya- pravaranvitha>Jaamadagnya</option>
+ <option value = Jaimini Bhargava- Vaithahavya- Raivasa - Thrayarisheya- pravaranvitha>Jaimini</option>
+ <option value = Bhaulathsya Bhargava- Aurva- jamadagnya - Thrayarisheya- pravaranvitha>Bhaulathsya</option>
+ <option value = Maandookeya Bhargava- Aurva- jamadagnya - Thrayarisheya- pravaranvitha>Maandookeya</option>
+ <option value = Maunabhargava Bhargava- Vaithahavya- Saavethasa - Thrayarisheya- pravaranvitha>Maunabhargava</option>
+ <option value = Vathoola Bhargava- Vaithahavya- Saavethasa - Thrayarisheya- pravaranvitha>Vathoola</option>
+ <option value = Srivathsa Bhargava- Syavana- Aapnavana- Aurva- Jamadagya - Pancharisheya- pravaranvitha>Srivathsa</option>
+ <option value = Garthsamatha Bhargava- Garthsamatha - Dvayarisheya- pravaranvitha>Garthsamatha</option>
+ <option value = Kanaka Bhargava- Garthsamatha - Dvayarisheya- pravaranvitha>Kanaka</option>
+ <option value = Yagnjapathi Bhargava- Garthsamatha - Dvayarisheya- pravaranvitha>Yagnjapathi</option>
+ <option value = Avada Bhargava- Aurva- Jamadagnya - Thrayarsheya- pravaranvitha>Avada</option>
+ <option value = AartishENa Bhargava- AarttisheNa- AnUpa - Thrayarsheya pravaranvitha>AartishENa</option>
+ <option value = Aaswalaayana Bhargava- Vaadhyaksha- Daivadaasa - Thrayarsheya- pravaranvitha>Aaswalaayana</option>
+ <option value = Kasyapi Bhargava- Vaidahvya- Saavethasa - Thrayarsheya- pravaranvitha>Kasyapi</option>
+ <option value = Kaathyaayana Bhargava- AartishENa- AnUpa - Thrayarsheya- pravaranvitha>Kaathyaayana</option>
+ <option value = Kaargya Bhargava- Vaithahavya- Revasa - Thrayarsheya- pravaranvitha>Kaargya</option>
+ <option value = Kruthsamatha Bhargava- Saunahothra- Gaarthsamatha - Thrayarsheya- pravaranvitha>Kruthsamatha</option>
+ <option value = Nairruthi Bhargava- AartishENa- AnUpa - Thrayarsheya- pravaranvitha>Nairruthi</option>
+</optgroup>
+
+
+<optgroup label="Aangirasa">
+  <option value =Uthasatha (Uthathya) Aangirasa- Audathya- Gauthama - Thrayarsheya- pravaranvitha>(Uthathya)</option>
+ <option value = Kamyaangirasa Aangirasa- Aamahaavya- Aurushaaya - Thrayarsheya- pravaranvitha>Kamyaangirasa</option>
+ <option value = GaargEya Aangirasa- Gaargya- Chaithya - Thrayarsheya- pravaranvitha>GaargEya</option>
+ <option value = GaargEya Aangirasa- Bhaarhaspathya- Bharatheevaja- Sainya- Gargya - Pancharsheya pravaranvitha>GaargEya</option>
+ <option value = Gauthama Aangirasa- Aayarsaya- Gauthama - Thrayarsheya- pravaranvitha>Gauthama</option>
+ <option value = Paurukuthsa Aangirasa- Paurukuthsa- Thraasathasya - Thrayarsheya- pravaranvitha>Paurukuthsa</option>
+ <option value = PaatharaayaNa Aangirasa- Paurukuthsa- Thraasathasya - Thrayarsheya- pravaranvitha>PaatharaayaNa</option>
+ <option value = Mauthgalya Aangirasa- Ambarisha- Mauthgalya - Thrayarsheya- pravaranvitha>Mauthgalya</option>
+ <option value = Bharatwaja Aangirasa- Bhaarhaspathya- Bharatwaja - Thrayarsheya- pravaranvitha>Bharatwaja</option>
+ <option value = Mauthgalya Aangirasa- Bhargyasva- Mauthgalya - Thrayarsheya- pravaranvitha>Mauthgalya</option>
+ <option value = Ratheethara Aangirasa- Vairoopa- Raatheethara - Thrayarsheya- pravaranvitha>Ratheethara</option>
+ <option value = Vishnuvruththa Aangirasa- Pauruguthsa- Thraasathasya - Thrayarsheya- pravaranvitha>Vishnuvruththa</option>
+ <option value = ShatamarshNa Aangirasa- Thraasathasya- Pauruguthsa - Thrayarsheya- pravaranvitha>ShatamarshNa</option>
+ <option value = Sankruthi Saathya- Saankruthya- Gauriveetha - Thrayarsheya- pravaranvitha>Sankruthi</option>
+ <option value = Sankruthi Aangirasa- Saaskruthya- Gauriveetha - Thrayarsheya- pravaranvitha>Sankruthi</option>
+ <option value = Haritha Aangirasa- Ambarisha- Yauvanaachva - Thrayarsheya- pravaranvitha>Haritha</option>
+ <option value = Aabasthamba Aangirasa- Bharhaspathya- Bharatwaja - Thrayarsheya- pravaranvitha>Aabasthamba</option>
+ <option value = Aayaasya Aangirassa- Aayaasya- Gauthama - Thrayarsheya- pravaranvitha>Aayaasya</option>
+ <option value = KaNva Aangirasa- Ajameeta- KaaNva - Thrayarsheya- pravaranvitha>KaNva</option>
+ <option value = KaNva Aangirasa- Aamaheeyava- Aurukshyasa - Thrayarsheya- pravaranvitha>KaNva</option>
+ <option value = Kabila Aangirasa- Aamaheeyava- Aurukshyasa - Thrayarsheya- pravaranvitha>Kabila</option>
+ <option value = Garga Aangirasa- Chainya- Gargaya (Garka) - Thrayarsheya- pravaranvitha>Garga</option>
+ <option value = Kuthsa Aangirasa- Ambareesha- Yauvanaachva - Thrayarsheya- pravaranvitha>Kuthsa</option>
+ <option value = Kuthsa Aangirasa- Maandathra- Kauthsa - Thrayarsheya- pravaranvitha>Kuthsa</option>
+ <option value = Kaundinya Aangirasa- Bharhaspathya- Bharatwaja - Thrayarsheya- pravaranvitha>Kaundinya</option>
+ <option value = Paurukuthsa Aangirasa- Paurukuthsa- Aasathasya - Thrayarsheya- pravaranvitha>Paurukuthsa</option>
+ <option value = Lohitha Aangirasa- Vaichvamitra- Lohitha - Thrayarsheya- pravaranvitha>Lohitha</option>
+</optgroup>
+
+<optgroup label="Aathri" >
+ <option value =Aathreya Aathreya- Aarsanaanasa- syaavaachva - Thrayarsheya- pravaranvitha>Aathreya-</option>
+ <option value = Mauthgalya Aathreya- Aarsanaanasa- Baurvaathitha - Thrayarsheya- pravaranvitha>Mauthgalya</option>
+ <option value = Athri Aathreya- Aarsanaanasa- syaavaachva - Thrayarsheya- pravaranvitha>Athri</option>
+ <option value = Uthaalaka Aathreya- Aarsanaanasa- syaavaachva - Thrayarsheya- pravaranvitha>Uthaalaka</option>
+ <option value = Muthkala Aathreya- Aarsanaanasa- Baurvaathitha - thrayarsheya- pravaranvitha>Muthkala</option>
+ <option value = Gauriveetha Aathreya- Aarsanaanasa- Baurvaathitha - thrayarsheya- pravaranvitha>Gauriveetha</option>
+ <option value = Dattathreya Aathreya- Aarsanaanasa- syaavaachva - Thrayarsheya- pravaranvitha>Dattathreya</option>
+ <option value = Dhananjaya Aathreya- Aarsanaanasa- Kaavishtira - Thrayarsheya- pravaranvitha>Dhananjaya</option>
+ <option value = Dhaksha ( Dakshi) Aathreya- Kaavishtira- Bhaurvathitha - Thrayarsheya- pravaranvitha>Dhaksha</option>
+ <option value = Bhaaleya Aathreya- Vaamarathya- Bauthrika - Thrayarsheya- pravaranvitha>Bhaaleya</option>
+ <option value = Pathanjala Aathreya- Aarsanaanasa- syaavaachva - Thrayarsheya- pravaranvitha>Pathanjala</option>
+ <option value = Bheejaavaaba Aathreya- Aarsanaanasa- Aadhitha - Thrayarsheya- pravaranvitha>Bheejaavaaba</option>
+ <option value = Aathreya- Aarsanaanasa- syaavaachva - Thrayarsheya- pravaranvitha>Aathreya-</option>
+</optgroup>
+
+
+
+
+<optgroup label="Vishwamitra" >
+<option value = Kausika (Kusika) Vaiswamithra- AagamarshaNa- Kausika - Thrayarsheya>Kausika</option>
+ <option value = Lohitha Vaiswamithra- Ashtaka- Lohitha - Thrayarsheya>Lohitha</option>
+ <option value = Viswamithra Vaiswamithra- Devaraatha- Authala - Thrayarsheya>Viswamithra</option>
+ <option value = Saalaavatha Vaiswamithra- Devaraatha- Authala - Thrayarsheya>Saalaavatha</option>
+ <option value = Kadhaka Vaiswamithra- Kadhaka - Dhwayarsheya>Kadhaka</option>
+ <option value = AagamarshaNa Vaiswamithra- AagamarshaNa- Kausika - Thrayarsheya>AagamarshaNa</option>
+ <option value = Gatha Vaiswamithra- Maaduchandasa- Aaja - Thrayarsheya>Gatha</option>
+ <option value = Kaathyaayana Vaiswamithra- Kathya- Adgeetha - Thrayarsheya>Kaathyaayana</option>
+ <option value = Kamakaayana Vaiswamithra- Devaseevarasa- DaivaTharasa (Rethasa) - Thrayarsheya>Kamakaayana</option>
+ <option value = Kaalava Vaiswamithra- Devaraatha- Audhala - Thrayarsheya>Kaalava</option>
+ <option value = Kausika Vaiswamithra- Salangayana- Kausika - Thrayarsheya>Kausika</option>
+ <option value = Jabhala (Jabali) Vaiswamithra- Devaraatha- Audhala - Thrayarsheya>Jabhala</option>
+ <option value = Devaraatha Vaiswamithra- Devaraatha- Aulitha - Thrayarsheya>Devaraatha</option>
+
+</optgroup>
+
+
+
+<optgroup label="Vashista" >
+<option value = Kaundinya Vaasishta- MaithravaruNa- Kaundinya - Thrayarsheya>Kaundinya</option>
+ <option value = Parasara Vaasishta- saakthya- Paarasarya - Thrayarsheya>Parasara</option>
+ <option value = Vaasishta Vaasishta- MaithravaruNa- Kaundinya - Thrayarsheya>Vaasishta</option>
+ <option value = Vasishta Vaasishta - Ekarsheya>Vasishta</option>
+ <option value = Haritha Vaasishta - Ekarsheya>Haritha</option>
+ <option value = Aachvalaayana Vaasishta- Aindrapramatha- Aabarathvasasya - Thrayarsheya>Aachvalaayana</option>
+ <option value = Upamanyu Vaasishta- Aindrapramatha- Aabarathvasasya - Thrayarsheya>Upamanyu</option>
+ <option value = KaaNva Vaasishta- Aindrapramatha- Aabarathvasasya - Thrayarsheya>KaaNva</option>
+ <option value = JaadhookarNya Vaasishta- Aindrapramatha- Aabarathvasasya - Thrayarsheya>JaadhookarNya</option>
+ <option value = Bhodayana Vaasishta- Aathreya- JaadhookarNya - Thrayarsheya>Bhodayana</option>
+ <option value = MithraavaruNa Vaasishta- MaithravaruNa- Kaundinya - Thrayarsheya>MithraavaruNa</option>
+ <option value = Mauthgala Vaasishta- MaithravaruNa- Kaundinya - Thrayarsheya>Mauthgala</option>
+ <option value = Vaasida Vaasishta- Aindrapramatha- Aaabarathvasasya - Thrayarsheya>Vaasida</option>
+
+</optgroup>
+
+
+
+
+<optgroup label="Kachyapa/Kasyapa" >
+ <option value = Naithruva Kasyapa Kaasyapa- Aavathsaara- Naithruva - Thrayarsheya>Naithruva</option>
+ <option value = Reba Kasyapa Kaasyapa- Aavathsaara- Rebaa - Thrayarsheya>Reba</option>
+ <option value = Saandilya Kaasyapa- Aavathsaara- Saandilya - Thrayarsheya>Saandilya</option>
+ <option value = Saandilya Kasyapa- Daivala- Asitha - Thrayarsheya>Saandilya</option>
+ <option value = Saandilya Kaasyapa- Aavathsaara- Naithruva- Reba- Raiba- Sandila- Chandilya - Sapthaarsheya>Saandilya</option>
+ <option value = Kaasyapa Kaasyapa- Aasitha- Daivala - Thrayarsheya>Kaasyapa</option>
+ <option value = Kachyapa Kaasyapa- Aavathsaara- Naithruva- Reba- Raiba- Sandila- Chandilya - Sapthaarsheya>Kachyapa</option>
+ <option value = Bruku Kaasyapa- Aavathsaara- Naithrava - Thrayarsheya>Bruku</option>
+ <option value = Maareesa Kaasyapa- Aavathsaara- Naithrava - Thrayarsheya>Maareesa</option>
+ <option value = Raibya (Reba) Kaasyapa- Aavathsaara- Raibya - Thrayarsheya>Raibya</option>
+ <option value = Baukakshi Kaasyapa- Aavathsaara- Aasitha - Thrayarsheya>Baukakshi</option>
+ <option value = Vaathsya Kaasyapa- Aavathsaara- Raibya - Thrayarsheya>Vaathsya</option>
+ <option value = Kaasyapa- Aavathsaara- Aasitha - Thrayarsheya>Kaasyapa-</option>
+
+</optgroup>
+
+
+
+
+<optgroup label="Agasthya " >
+
+ <option value =Agasthya Agasthya - Ekarisheya- pravaranvitha>Agasthya</option>
+ <option value = Idhmavaaha Agasthya - Ekarisheya- Pravaranvitha>Idhmavaaha</option>
+ <option value = Aagasthi Agasthya- Maahendra- Maayobhuva - Thryarisheya- pravaranvitha>Aagasthi</option>
+ <option value = Agasthi Agasthya- Dhradyavrutha- Aidhmavaaha - Thrayarisheya- pravaranvitha>Agasthi</option>
+ <option value = Idhmavaaha Agasthya- Vaathyasva- Aidhmavaaha - thrayarisheya- pravaranvitha>Idhmavaaha</option>
+ <option value = Pulaha Agasthya- Maahendra- Maayobhuva - Thrayarisheya- pravaranvitha>Pulaha</option>
+ <option value = Maayobhuva Agasthya- Maahendra- Maayobhuva - Thrayarisheya- pravaranvitha>Maayobhuva</option>
+      </optgroup>
+      </select>
+    </div>
+    <div class="col-sm-1">
+    <p></p>
+    <a  href="#" data-toggle="tooltip" data-original-title="Type in your Gotra to get the corresponding Thrayarisheya- pravaranvitha." onclick="linkOnClick(event)">Help</a>
+</div>
+    <div class=" gotraError" ></div>
+  </div>
+  <div class="form-group">
+  <label class="control-label col-sm-3"> Select Your Soothram: <sub>*</sub></label>
+  <div class="col-sm-4">
+    <select id="soothram" class="form-control" required data-error="Please select a soothram">
+    <option value="">Select a Soothram</option>
+    <option value="Aapasthamba-Yajur">Aapasthamba-Yajur </option>
+    <option value="Bodayana-Yajur">Bodayana-Yajur</option>
+    <option value="Asvalayana-Rig">Asvalayana-Rig</option>
+    <option value="Dhrahyayana-Samam">Dhrahyayana-Samam</option>  
+    </select>
+  </div>
+  <div class="help-block with-errors" ></div>
+  </div>
+
+     <div class="form-group">
+    <label class="control-label col-sm-3">Kuladeivam Koil:<sub>*</sub></label>
+     <div class="col-sm-4">
+      <input type="text" class="form-control" id="kulaDeivam" placeholder="Enter Kuladeivam Koil"  pattern="[A-Za-z.,() ]{1,1000}" data-error="Please enter a valid Koil Name" required >
+    </div>
+     <div class="help-block with-errors" ></div>  
+  </div>
+</fieldset>
+  <div class="form-group btnHolder"> 
+    <div class="col-md-offset-4 col-sm-offset-4 col-sm-2 col-md-2 col-xs-4 col-xs-offset-2">
+      <input type="submit" class="btn btn-primary form-control" id="submitBtn" value="Submit">
+    </div>
+     <div class=" col-sm-2 col-md-2 col-xs-4">
+      <input type="button" class="btn btn-primary form-control" onclick="resetForm()" value="Reset">
+    </div>
+    <!-- <div class=" col-sm-2 col-md-2 col-xs-4">
+      <input type="button" class="btn btn-primary form-control" data-backdrop="static" data-keyboard="false" data-toggle="modal" href="#faqModel" value="FAQ's">
+    </div> -->
+    <div class="col-sm-offset-4 col-sm-2 col-md-1 displayNone">
+      <a  class="btn btn-primary"  id="modalBtn" data-toggle="modal" href="#myModal" data-backdrop="static" data-keyboard="false">modalBtn</a>
+    </div>
+    <div class="col-sm-offset-4 col-sm-2 col-md-1 displayNone">
+      <a  class="btn btn-primary"  id="cBtn" data-toggle="modal" href="#confirmAlert" data-backdrop="static" data-keyboard="false">alertbtn</a>
+    </div>
+
+    <div class="col-sm-offset-4 col-sm-2 col-md-1 displayNone">
+      <a  class="btn btn-primary"  id="alertBtn" data-toggle="modal" href="#errorAlert" data-backdrop="static" data-keyboard="false">alertbtn</a>
+    </div>
+    
+
+  </div>
+
+</form>
+  </div>
+  </div>
+</div>
+</div>
+</body>
+</html>
